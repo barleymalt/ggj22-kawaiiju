@@ -36,7 +36,7 @@ MonoBehaviour:
   - Name: Palla
     Satisfaction: 3
     Kind: 2
-    Sprite: {fileID: 21300000, guid: 6aa8f041928fd7a49baaf845f1c0ef55, type: 3}
+    Sprite: {fileID: 21300000, guid: f51800eba7e96f046afeca2d80bf2bb1, type: 3}
     Clip: {fileID: 0}
   - Name: Macchinina
     Satisfaction: 3

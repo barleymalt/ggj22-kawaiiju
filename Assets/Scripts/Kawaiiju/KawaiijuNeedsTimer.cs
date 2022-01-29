@@ -51,7 +51,7 @@ namespace Kawaiiju
                 m_TimerCounter = 0;
                 m_TimerTarget = Random.Range(m_TimerRandomRange.x, m_TimerRandomRange.y);
 
-                m_NeedsBaloon.enabled = false;   // Todo: dotween
+                m_NeedsBaloon.gameObject.SetActive(false);   // Todo: dotween
 
                 while (m_TimerCounter < m_TimerTarget)
                 {
@@ -60,8 +60,8 @@ namespace Kawaiiju
                     m_TimerCounter += 1;
                 }
 
-                m_AppearedNeed = GetRandomNeedKind();
-                m_NeedsBaloon.enabled = true;   // Todo: dotween
+                m_AppearedNeed = NEED_KIND.Food;// GetRandomNeedKind();
+                m_NeedsBaloon.gameObject.SetActive(true);   // Todo: dotween
                 
                 Debug.Log("Need appeared.");
 
@@ -76,7 +76,7 @@ namespace Kawaiiju
                 }
 
                 m_AppearedNeed = NEED_KIND.None;
-                m_NeedsBaloon.enabled = false;   // Todo: dotween
+                m_NeedsBaloon.gameObject.SetActive(false);   // Todo: dotween
 
                 Debug.Log("Waited too long, need disappeared.");
             }
