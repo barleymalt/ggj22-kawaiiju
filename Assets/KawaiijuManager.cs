@@ -4,33 +4,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class KawaiijuManager : MonoBehaviour
+namespace Kawaiiju
 {
-    [SerializeField] private Transform m_Cursor;
-
-    private Camera _camera;
-    private NavMeshAgent _navAgent;
-
-    private void Awake()
+    public class KawaiijuManager : MonoBehaviour
     {
-        _camera = Camera.main;
-        _navAgent = GetComponent<NavMeshAgent>();
-    }
+        [SerializeField] private Transform m_Cursor;
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        private NavMeshAgent _navAgent;
+
+        private KawaiijuNeedsBar _needsBar;
+        private KawaiijuFetch _fetch;
+
+        private void Awake()
         {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        
-            if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
+            _navAgent = GetComponent<NavMeshAgent>();
+            _needsBar = GetComponentInChildren<KawaiijuNeedsBar>();
+            _fetch = GetComponentInChildren<KawaiijuFetch>();
+        }
+
+        private void Start()
+        {
+            InitNeedEvents();
+        }
+
+        void Update()
+        {
+            HandleMovement();
+        }
+
+        private void HandleMovement()
+        {
+            if (_fetch.ClosestItem)
             {
-                _navAgent.SetDestination(hit.point);
+                _navAgent.SetDestination(_fetch.ClosestItem.position);
             }
         }
 
+        private void InitNeedEvents()
+        {
+            var kawaiijuFetch = FindObjectOfType<KawaiijuFetch>();
 
-        // NavMesh.SamplePosition()
-        // m_Cursor.position = worldPosition;
+            kawaiijuFetch.OnWantedNeedSatisfied_AddCallback(OnWantedNeedSatisfied);
+            kawaiijuFetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
+            kawaiijuFetch.OnArbitraryNeedSatisfied_AddCallback(OnArbitraryNeedSatisfied);
+        }
+
+        private void OnWantedNeedSatisfied(Item fetchedItem)
+        {
+            _needsBar.IncreaseNeedsBar(fetchedItem.SatisfactionAmount);
+        }
+
+        private void OnUnwantedNeedSatisfied(Item fetchedItem)
+        {
+            _needsBar.DecreaseNeedsBar((float) fetchedItem.SatisfactionAmount / 2);
+        }
+
+        private void OnArbitraryNeedSatisfied()
+        {
+            _needsBar.IncreaseNeedsBar(1);
+        }
     }
 }
