@@ -36,34 +36,31 @@ namespace Kawaiiju
         
         public void SpawnItemOne()
         {
-            var spawnedItem = Instantiate(m_ItemPrefab);
-            
-            spawnedItem.InitializeItem(m_ItemOneData);
-            SpawnedItems.Add(spawnedItem);
-            
-            spawnedItem.transform.position = GetRandomSpawnPoint();
+            SpawnItem(m_ItemOneData);
         }
-        
+
         public void SpawnItemTwo()
         {
-            var spawnedItem = Instantiate(m_ItemPrefab);
-            
-            spawnedItem.InitializeItem(m_ItemTwoData);
-            SpawnedItems.Add(spawnedItem);
-
-            spawnedItem.transform.position = GetRandomSpawnPoint();
+            SpawnItem(m_ItemTwoData);
         }
         
         public void SpawnItemThree()
         {
+            SpawnItem(m_ItemThreeData);
+        }
+
+        private void SpawnItem(ItemData itemData)
+        {
             var spawnedItem = Instantiate(m_ItemPrefab);
-            
-            spawnedItem.InitializeItem(m_ItemThreeData);
+
+            spawnedItem.InitializeItem(itemData);
             SpawnedItems.Add(spawnedItem);
 
             spawnedItem.transform.position = GetRandomSpawnPoint();
+            
+            UpdateSpawnableItems();
         }
-
+        
         public void DestroyItem(Item itemToDestroy)
         {
             SpawnedItems.Remove(itemToDestroy);
@@ -71,9 +68,9 @@ namespace Kawaiiju
             Destroy(itemToDestroy.gameObject);
         }
 
-        Vector3 GetRandomSpawnPoint()
+        private Vector3 GetRandomSpawnPoint()
         {
-            return m_SpawnPoints[Random.Range(0, m_SpawnPoints.Length - 1)].position;
+            return m_SpawnPoints[Random.Range(0, m_SpawnPoints.Length)].position;
         }
     }
 }

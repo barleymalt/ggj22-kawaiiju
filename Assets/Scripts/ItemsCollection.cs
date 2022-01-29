@@ -10,15 +10,19 @@ namespace Kawaiiju
 
         public ItemData GetRandomItemData
         {
-            get { return Items[Random.Range(0, Items.Count - 1)]; }
+            get { return Items[Random.Range(0, Items.Count)]; }
         }
     }
 
     [System.Serializable]
     public struct ItemData
     {
+        public string Name;
+        public int Satisfaction;
+
+        [Space]
         public NEED_KIND Kind;
         public Sprite Sprite;
-        public int Satisfaction;
+        public AudioClip Clip;
     }
 }

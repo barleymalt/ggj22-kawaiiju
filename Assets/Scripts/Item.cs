@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace Kawaiiju
 {
@@ -9,12 +10,13 @@ namespace Kawaiiju
         [SerializeField] private int m_SatisfactionAmount;
 
         private SpriteRenderer _spriteRenderer;
-        
+        private AimConstraint _aimConstraint;
+
         public NEED_KIND NeedKind
         {
             get { return m_NeedKind; }
         }
-        
+
         public int SatisfactionAmount
         {
             get { return m_SatisfactionAmount; }
@@ -23,6 +25,14 @@ namespace Kawaiiju
         private void Awake()
         {
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            _aimConstraint = GetComponentInChildren<AimConstraint>();
+
+            _aimConstraint.AddSource(
+                new ConstraintSource
+                {
+                    sourceTransform = Camera.main.transform
+                }
+            );
         }
 
         public void InitializeItem(ItemData itemData)
