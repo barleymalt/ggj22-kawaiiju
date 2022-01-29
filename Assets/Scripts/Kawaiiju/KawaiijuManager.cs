@@ -8,60 +8,99 @@ namespace Kawaiiju
 {
     public class KawaiijuManager : MonoBehaviour
     {
-        [SerializeField] private Transform m_Cursor;
+        [SerializeField] private KawaiijuNeedsBar m_KawaiijuKid;
+        [SerializeField] private KawaiijuNeedsBar m_KawaiijuYoung;
+        [SerializeField] private KawaiijuNeedsBar m_KawaiijuAdult;
+        
+        [Space, SerializeField] private int[] m_LevelMilestones;
+        [Space, ReadOnlyAttribute] public int KawaiijuLevel = 1;
 
-        private NavMeshAgent _navAgent;
+        [ReadOnlyAttribute]
+        public KawaiijuNeedsBar CurrentNeedsBar;
 
-        private KawaiijuNeedsBar _needsBar;
-        private KawaiijuFetch _fetch;
-
-        private void Awake()
+        public int[] LevelMilestones
         {
-            _navAgent = GetComponent<NavMeshAgent>();
-            _needsBar = GetComponentInChildren<KawaiijuNeedsBar>();
-            _fetch = GetComponentInChildren<KawaiijuFetch>();
+            get { return m_LevelMilestones; }
         }
 
         private void Start()
         {
-            InitNeedEvents();
+            HandleLevelUp();
         }
 
         void Update()
         {
-            HandleMovement();
+            if (OnMaxLevelReached())
+                return;
+
+            if (OnDeath())
+                return;
+
+            OnLevelUp();
         }
 
-        private void HandleMovement()
+        #region CORE
+
+        private void OnLevelUp()
         {
-            if (_fetch.ClosestItem && _navAgent.velocity.magnitude < .1f)
+            // Level up when a milestone is reached
+            if (CurrentNeedsBar.NeedsBarValue > m_LevelMilestones[KawaiijuLevel])
             {
-                _navAgent.SetDestination(_fetch.ClosestItem.position);
+                Debug.Log("Level up!");
+
+                KawaiijuLevel++;
+                
+                HandleLevelUp();
             }
         }
 
-        private void InitNeedEvents()
+        private bool OnDeath()
         {
-            var kawaiijuFetch = FindObjectOfType<KawaiijuFetch>();
+            // If the needs bar value is lower than the current level minimum, death!
+            if (CurrentNeedsBar.NeedsBarValue < m_LevelMilestones[KawaiijuLevel - 1])
+            {
+                Debug.Log("Kawaiiju ded!");
 
-            kawaiijuFetch.OnWantedNeedSatisfied_AddCallback(OnWantedNeedSatisfied);
-            kawaiijuFetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
-            kawaiijuFetch.OnArbitraryNeedSatisfied_AddCallback(OnArbitraryNeedSatisfied);
+                return true;
+            }
+
+            return false;
         }
 
-        private void OnWantedNeedSatisfied(Item fetchedItem)
+        private bool OnMaxLevelReached()
         {
-            _needsBar.IncreaseNeedsBar(fetchedItem.SatisfactionAmount);
+            // Check when the max level is reached, WIN CONDITION?
+            if (KawaiijuLevel == m_LevelMilestones.Length)
+            {
+                Debug.Log("Max level reached!");
+
+                return true;
+            }
+
+            return false;
         }
 
-        private void OnUnwantedNeedSatisfied(Item fetchedItem)
-        {
-            _needsBar.DecreaseNeedsBar((float) fetchedItem.SatisfactionAmount / 2);
-        }
+        #endregion
 
-        private void OnArbitraryNeedSatisfied()
+        private void HandleLevelUp()
         {
-            _needsBar.IncreaseNeedsBar(1);
+            switch (KawaiijuLevel)
+            {
+                case 1:
+                    CurrentNeedsBar = m_KawaiijuKid;
+                    m_KawaiijuKid.gameObject.SetActive(true);
+                    break;
+                case 2:
+                    m_KawaiijuKid.gameObject.SetActive(false);
+                    m_KawaiijuYoung.gameObject.SetActive(true);
+                    CurrentNeedsBar = m_KawaiijuYoung;
+                    break;
+                case 3:
+                    m_KawaiijuYoung.gameObject.SetActive(false);
+                    m_KawaiijuAdult.gameObject.SetActive(true);
+                    CurrentNeedsBar = m_KawaiijuAdult;
+                    break;
+            }
         }
     }
 }

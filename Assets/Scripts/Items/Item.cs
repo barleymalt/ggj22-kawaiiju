@@ -10,7 +10,7 @@ namespace Kawaiiju
         [SerializeField] private int m_SatisfactionAmount;
 
         private SpriteRenderer _spriteRenderer;
-        private AimConstraint _aimConstraint;
+        private LookAtConstraint _lookAtConstraint;
 
         public NEED_KIND NeedKind
         {
@@ -25,9 +25,9 @@ namespace Kawaiiju
         private void Awake()
         {
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            _aimConstraint = GetComponentInChildren<AimConstraint>();
+            _lookAtConstraint = GetComponentInChildren<LookAtConstraint>();
 
-            _aimConstraint.AddSource(
+            _lookAtConstraint.AddSource(
                 new ConstraintSource
                 {
                     sourceTransform = Camera.main.transform

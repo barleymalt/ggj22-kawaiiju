@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace Kawaiiju
@@ -32,9 +33,9 @@ namespace Kawaiiju
         public void OnArbitraryNeedSatisfied_AddCallback(UnityAction a) => _onArbitraryNeedSatisfied += a;
 
 
-        private void Awake()
+        private void OnEnable()
         {
-            _kawaiijuNeedsTimer = FindObjectOfType<KawaiijuNeedsTimer>();
+            _kawaiijuNeedsTimer = GetComponentInParent<KawaiijuNeedsTimer>();
             _itemsThrower = FindObjectOfType<ItemsThrower>();
         }
 
@@ -77,6 +78,9 @@ namespace Kawaiiju
             }
 
             _itemsThrower.DestroyItem(fetchedItem);
+
+            if (m_ClosestItem == fetchedItem.transform)
+                m_ClosestItem = null;
         }
 
         Transform GetClosestItem(IEnumerable<Item> items)

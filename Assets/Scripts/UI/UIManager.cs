@@ -18,7 +18,7 @@ namespace Kawaiiju
         [SerializeField] private Slider m_NeedsBar;
         [SerializeField] private float m_IncreaseAmount;
 
-        private KawaiijuNeedsBar _kawaiijuNeedsBar;
+        private KawaiijuManager _kawaiijuManager;
 
         private void Awake()
         {
@@ -32,22 +32,25 @@ namespace Kawaiiju
             itemsThrower.OnUpdateButtonOne_AddCallback(m_ItemOne.UpdateButtonIcon);
             itemsThrower.OnUpdateButtonTwo_AddCallback(m_ItemTwo.UpdateButtonIcon);
             itemsThrower.OnUpdateButtonThree_AddCallback(m_ItemThree.UpdateButtonIcon);
-            
+        }
+
+        private void Start()
+        {
             // DebugUI
-            _kawaiijuNeedsBar = FindObjectOfType<KawaiijuNeedsBar>();
+            _kawaiijuManager = FindObjectOfType<KawaiijuManager>();
 
             m_IncreaseBarValue.onClick.AddListener(IncreaseNeedsBar);
-            m_NeedsBar.maxValue = _kawaiijuNeedsBar.NeedsBarMaxValue;
+            m_NeedsBar.maxValue = _kawaiijuManager.CurrentNeedsBar.NeedsBarMaxValue;
         }
 
         private void Update()
         {
-            m_NeedsBar.value = _kawaiijuNeedsBar.NeedsBarValue;
+            m_NeedsBar.value = _kawaiijuManager.CurrentNeedsBar.NeedsBarValue;
         }
 
         void IncreaseNeedsBar()
         {
-            _kawaiijuNeedsBar.IncreaseNeedsBar(m_IncreaseAmount);
+            _kawaiijuManager.CurrentNeedsBar.IncreaseNeedsBar(m_IncreaseAmount);
         }
     }
 }

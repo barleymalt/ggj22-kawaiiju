@@ -1,87 +1,81 @@
+using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Kawaiiju
 {
     public class KawaiijuNeedsBar : MonoBehaviour
     {
-        [SerializeField] private float m_needsBarStartValue;
+        // [SerializeField] private float m_needsBarStartValue;
         [SerializeField] private float m_needsBarDropSpeed;
 
-        [Space]
-        [SerializeField] private int[] m_LevelMilestones;
-
         [Space, ReadOnlyAttribute] public float NeedsBarValue;
-        [ReadOnlyAttribute] public int KawaiijuLevel = 1;
+
+        private KawaiijuManager _kawaiijuManager;
+        private KawaiijuFetch _fetch;
+        
+        private NavMeshAgent _navAgent;
 
         public float NeedsBarStartValue
         {
-            get { return m_needsBarStartValue; }
+            get { return _kawaiijuManager.LevelMilestones[_kawaiijuManager.KawaiijuLevel - 1] + 10; }
         }
 
         public float NeedsBarMaxValue
         {
-            get { return m_LevelMilestones[m_LevelMilestones.Length - 1]; }
+            get { return _kawaiijuManager.LevelMilestones[_kawaiijuManager.LevelMilestones.Length - 1]; }
+        }
+
+        private void OnEnable()
+        {
+            _kawaiijuManager = GetComponentInParent<KawaiijuManager>();
+            
+            _navAgent = GetComponentInParent<NavMeshAgent>();
+            _fetch = GetComponentInChildren<KawaiijuFetch>();
         }
 
         private void Start()
         {
-            NeedsBarValue = m_needsBarStartValue;
+            NeedsBarValue = NeedsBarStartValue;
+            
+            InitNeedEvents();
         }
 
         private void Update()
         {
-            if (OnMaxLevelReached())
-                return;
-
-            if (OnDeath())
-                return;
-
-            OnLevelUp();
-
             // Decrease bar constantly
             NeedsBarValue -= m_needsBarDropSpeed * Time.deltaTime;
-        }
-
-        #region CORE
-
-        private void OnLevelUp()
-        {
-            // Level up when a milestone is reached
-            if (NeedsBarValue > m_LevelMilestones[KawaiijuLevel])
+            
+            // Todo: don't move if dead
+            if (_fetch.ClosestItem && _navAgent.velocity.magnitude < .1f)
             {
-                Debug.Log("Level up!");
-
-                KawaiijuLevel++;
+                _navAgent.SetDestination(_fetch.ClosestItem.position);
             }
         }
-
-        private bool OnDeath()
+        
+        private void InitNeedEvents()
         {
-            // If the needs bar value is lower than the current level minimum, death!
-            if (NeedsBarValue < m_LevelMilestones[KawaiijuLevel - 1])
-            {
-                Debug.Log("Kawaiiju ded!");
+            var kawaiijuFetch = GetComponentInChildren<KawaiijuFetch>();
 
-                return true;
-            }
-
-            return false;
+            kawaiijuFetch.OnWantedNeedSatisfied_AddCallback(OnWantedNeedSatisfied);
+            kawaiijuFetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
+            kawaiijuFetch.OnArbitraryNeedSatisfied_AddCallback(OnArbitraryNeedSatisfied);
         }
 
-        private bool OnMaxLevelReached()
+        private void OnWantedNeedSatisfied(Item fetchedItem)
         {
-            // Check when the max level is reached, WIN CONDITION?
-            if (KawaiijuLevel == m_LevelMilestones.Length)
-            {
-                Debug.Log("Max level reached!");
-
-                return true;
-            }
-
-            return false;
+            IncreaseNeedsBar(fetchedItem.SatisfactionAmount);
         }
 
-        #endregion
+        private void OnUnwantedNeedSatisfied(Item fetchedItem)
+        {
+            DecreaseNeedsBar((float) fetchedItem.SatisfactionAmount / 2);
+        }
+
+        private void OnArbitraryNeedSatisfied()
+        {
+            IncreaseNeedsBar(1);
+        }
 
         public void IncreaseNeedsBar(float amount)
         {
