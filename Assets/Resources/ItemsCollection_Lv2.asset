@@ -18,22 +18,22 @@ MonoBehaviour:
     Kind: 1
     Sprite: {fileID: 21300000, guid: b07d23947008f314d9328609fd64e416, type: 3}
     Clip: {fileID: 0}
-  - Name: Pollo
+  - Name: Chicken
     Satisfaction: 3
     Kind: 1
     Sprite: {fileID: 21300000, guid: 57b17ac6c5391a94aa65d64f05bbecf7, type: 3}
     Clip: {fileID: 0}
-  - Name: Bistecca
+  - Name: Steak
     Satisfaction: 3
     Kind: 1
     Sprite: {fileID: 21300000, guid: 57b17ac6c5391a94aa65d64f05bbecf7, type: 3}
     Clip: {fileID: 0}
-  - Name: Bomba
-    Satisfaction: 3
+  - Name: Bomb
+    Satisfaction: 5
     Kind: 2
     Sprite: {fileID: 21300000, guid: d3d24c8a1c1b00e4083c80370b60a1b9, type: 3}
     Clip: {fileID: 0}
-  - Name: Bidone Spazzatura
+  - Name: Trash
     Satisfaction: 3
     Kind: 2
     Sprite: {fileID: 21300000, guid: d3d24c8a1c1b00e4083c80370b60a1b9, type: 3}
@@ -42,4 +42,19 @@ MonoBehaviour:
     Satisfaction: 3
     Kind: 2
     Sprite: {fileID: 21300000, guid: 21a904d1f51a3254cb2e5acf24acdaf9, type: 3}
+    Clip: {fileID: 0}
+  - Name: Pillow
+    Satisfaction: 3
+    Kind: 2
+    Sprite: {fileID: 21300000, guid: 58b359db3a7dd2f4f88239d4fed71a13, type: 3}
+    Clip: {fileID: 0}
+  - Name: Poison
+    Satisfaction: 3
+    Kind: 2
+    Sprite: {fileID: 21300000, guid: 305ef09dc962bb54ca4c8e3928cc3047, type: 3}
+    Clip: {fileID: 0}
+  - Name: Booze
+    Satisfaction: 5
+    Kind: 2
+    Sprite: {fileID: 21300000, guid: 372a48b3f5ea0924dba04f09cce1138a, type: 3}
     Clip: {fileID: 0}
