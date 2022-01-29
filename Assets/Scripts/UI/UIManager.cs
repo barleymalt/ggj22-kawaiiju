@@ -9,9 +9,9 @@ namespace Kawaiiju
     public class UIManager : MonoBehaviour
     {
         [Header("Game UI")]
-        [SerializeField] private Button m_ItemOne;
-        [SerializeField] private Button m_ItemTwo;
-        [SerializeField] private Button m_ItemThree;
+        [SerializeField] private ItemButton m_ItemOne;
+        [SerializeField] private ItemButton m_ItemTwo;
+        [SerializeField] private ItemButton m_ItemThree;
 
         [Header("Debug UI")]
         [SerializeField] private Button m_IncreaseBarValue;
@@ -28,6 +28,10 @@ namespace Kawaiiju
             m_ItemOne.onClick.AddListener(itemsThrower.SpawnItemOne);
             m_ItemTwo.onClick.AddListener(itemsThrower.SpawnItemTwo);
             m_ItemThree.onClick.AddListener(itemsThrower.SpawnItemThree);
+            
+            itemsThrower.OnUpdateButtonOne_AddCallback(m_ItemOne.UpdateButtonIcon);
+            itemsThrower.OnUpdateButtonTwo_AddCallback(m_ItemTwo.UpdateButtonIcon);
+            itemsThrower.OnUpdateButtonThree_AddCallback(m_ItemThree.UpdateButtonIcon);
             
             // DebugUI
             _kawaiijuNeedsBar = FindObjectOfType<KawaiijuNeedsBar>();
