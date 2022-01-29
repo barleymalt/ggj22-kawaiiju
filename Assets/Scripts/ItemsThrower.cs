@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,18 +9,36 @@ namespace Kawaiiju
     public class ItemsThrower : MonoBehaviour
     {
         [SerializeField] private Transform[] m_SpawnPoints;
+        [SerializeField] private ItemsCollection m_ItemsCollection;
         
         [Space]
-        [SerializeField] private Item m_ItemOne;
-        [SerializeField] private Item m_ItemTwo;
-        [SerializeField] private Item m_ItemThree;
+        [SerializeField] private Item m_ItemPrefab;
+        [Space]
+        [SerializeField] private ItemData m_ItemOneData;
+        [SerializeField] private ItemData m_ItemTwoData;
+        [SerializeField] private ItemData m_ItemThreeData;
         
         [ReadOnlyAttribute]
         public List<Item> SpawnedItems = new List<Item>();
+
+
+        private void Start()
+        {
+            UpdateSpawnableItems();
+        }
+
+        public void UpdateSpawnableItems()
+        {
+            m_ItemOneData = m_ItemsCollection.GetRandomItemData;
+            m_ItemTwoData = m_ItemsCollection.GetRandomItemData;
+            m_ItemThreeData = m_ItemsCollection.GetRandomItemData;
+        }
         
         public void SpawnItemOne()
         {
-            var spawnedItem = Instantiate(m_ItemOne);
+            var spawnedItem = Instantiate(m_ItemPrefab);
+            
+            spawnedItem.InitializeItem(m_ItemOneData);
             SpawnedItems.Add(spawnedItem);
             
             spawnedItem.transform.position = GetRandomSpawnPoint();
@@ -27,7 +46,9 @@ namespace Kawaiiju
         
         public void SpawnItemTwo()
         {
-            var spawnedItem = Instantiate(m_ItemTwo);
+            var spawnedItem = Instantiate(m_ItemPrefab);
+            
+            spawnedItem.InitializeItem(m_ItemTwoData);
             SpawnedItems.Add(spawnedItem);
 
             spawnedItem.transform.position = GetRandomSpawnPoint();
@@ -35,7 +56,9 @@ namespace Kawaiiju
         
         public void SpawnItemThree()
         {
-            var spawnedItem = Instantiate(m_ItemThree);
+            var spawnedItem = Instantiate(m_ItemPrefab);
+            
+            spawnedItem.InitializeItem(m_ItemThreeData);
             SpawnedItems.Add(spawnedItem);
 
             spawnedItem.transform.position = GetRandomSpawnPoint();

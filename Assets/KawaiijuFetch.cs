@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Kawaiiju;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -83,7 +80,7 @@ namespace Kawaiiju
             _itemsThrower.DestroyItem(fetchedItem);
         }
 
-        Transform GetClosestItem(Item[] items)
+        Transform GetClosestItem(IEnumerable<Item> items)
         {
             Transform tMin = null;
             float minDist = Mathf.Infinity;
