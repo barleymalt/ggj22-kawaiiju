@@ -1,57 +1,83 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class KawaiijuNeedsTimer : MonoBehaviour
+namespace Kawaiiju
 {
-    // Set the timer to trigger between this two values
-    [Header("Need Trigger Timer")]
-    [SerializeField] private int m_TimerMin;
-    [SerializeField] private int m_TimerMax;
-    [Space]
-    [SerializeField, ReadOnlyAttribute] private int timerCounter;
-    [SerializeField, ReadOnlyAttribute] private int timerTarget;
-    
-    // How long the need stays after the timer triggerz
-    [Header("Need Span")]
-    [SerializeField] private float m_ShowNeedSpan;
-    [Space]
-    [SerializeField, ReadOnlyAttribute] private int needSpanCounter;
-    
-    
-    private void Start()
+    public enum NEED_KIND
     {
-        StartCoroutine(C_TriggerNeedTimer());
+        None,
+        Food,
+        Play,
+        Rest
     }
 
-    private IEnumerator C_TriggerNeedTimer()
+    public class KawaiijuNeedsTimer : MonoBehaviour
     {
-        while (true)
+        // Set the timer to trigger between this two values
+        [Header("Need Trigger Timer")]
+        [SerializeField] private Vector2Int m_TimerRandomRange;
+        [Space]
+        [SerializeField, ReadOnlyAttribute] private int m_TimerCounter;
+        [SerializeField, ReadOnlyAttribute] private int m_TimerTarget;
+
+        // How long the need stays after the timer triggerz
+        [Header("Need Span")]
+        [SerializeField] private float m_ShowNeedSpan;
+        [SerializeField, ReadOnlyAttribute] private int m_NeedSpanCounter;
+
+        [Space]
+        [SerializeField, ReadOnlyAttribute] private NEED_KIND m_AppearedNeed;
+
+        public NEED_KIND AppearedNeed
         {
-            // Timer for when the next need needs to be spawned
-            timerCounter = 0;
-            timerTarget = Random.Range(m_TimerMin, m_TimerMax);
-            
-            while (timerCounter < timerTarget)
+            get { return m_AppearedNeed; }
+        }
+
+        private void Start()
+        {
+            StartCoroutine(C_TriggerNeedTimer());
+        }
+
+        private IEnumerator C_TriggerNeedTimer()
+        {
+            while (true)
             {
-                yield return new WaitForSecondsRealtime(1);
+                // Timer for when the next need needs to be spawned
+                m_TimerCounter = 0;
+                m_TimerTarget = Random.Range(m_TimerRandomRange.x, m_TimerRandomRange.y);
 
-                timerCounter += 1;
+                while (m_TimerCounter < m_TimerTarget)
+                {
+                    yield return new WaitForSecondsRealtime(1);
+
+                    m_TimerCounter += 1;
+                }
+
+                m_AppearedNeed = GetRandomNeedKind();
+
+                Debug.Log("Need appeared.");
+
+                // Timer for how long the need will be visible
+                m_NeedSpanCounter = 0;
+
+                while (m_NeedSpanCounter < m_ShowNeedSpan)
+                {
+                    yield return new WaitForSecondsRealtime(1);
+
+                    m_NeedSpanCounter += 1;
+                }
+
+                m_AppearedNeed = NEED_KIND.None;
+
+                Debug.Log("Waited too long, need disappeared.");
             }
+        }
 
-            Debug.Log("Trigger need.");
-
-            // Timer for how long the need will be visible
-            needSpanCounter = 0;
-            
-            while (needSpanCounter < m_ShowNeedSpan)
-            {
-                yield return new WaitForSecondsRealtime(1);
-
-                needSpanCounter += 1;
-            }
-            
-            Debug.Log("Waited too long, need disappeared.");
+        static NEED_KIND GetRandomNeedKind()
+        {
+            return (NEED_KIND) Random.Range(1, System.Enum.GetValues(typeof(NEED_KIND)).Length);
         }
     }
 }
