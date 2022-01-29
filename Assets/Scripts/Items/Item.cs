@@ -25,7 +25,7 @@ namespace Kawaiiju
         private void Awake()
         {
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            _lookAtConstraint = GetComponentInChildren<AimConstraint>();
+            _lookAtConstraint = GetComponentInChildren<LookAtConstraint>();
 
             _lookAtConstraint.AddSource(
                 new ConstraintSource

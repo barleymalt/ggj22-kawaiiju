@@ -60,7 +60,7 @@ namespace Kawaiiju
                     m_TimerCounter += 1;
                 }
 
-                m_AppearedNeed = NEED_KIND.Food;// GetRandomNeedKind();
+                m_AppearedNeed = GetRandomNeedKind();
                 m_NeedsBaloon.gameObject.SetActive(true);   // Todo: dotween
                 
                 Debug.Log("Need appeared.");
