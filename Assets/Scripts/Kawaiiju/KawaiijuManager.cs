@@ -34,7 +34,7 @@ namespace Kawaiiju
 
         private void HandleMovement()
         {
-            if (_fetch.ClosestItem)
+            if (_fetch.ClosestItem && _navAgent.velocity.magnitude < .1f)
             {
                 _navAgent.SetDestination(_fetch.ClosestItem.position);
             }

@@ -49,7 +49,6 @@ namespace Kawaiiju
             }
         }
 
-
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag(ITEM_TAG) || !other.TryGetComponent(out Item fetchedItem))
