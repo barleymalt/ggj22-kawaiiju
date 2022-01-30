@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 namespace Kawaiiju
 {
-    public class KawaiijuNeedsBar : MonoBehaviour
+    public class KawaiijuController : MonoBehaviour
     {
         // [SerializeField] private float m_needsBarStartValue;
         [SerializeField] private float m_needsBarDropSpeed;
@@ -12,13 +12,14 @@ namespace Kawaiiju
         [Space, ReadOnlyAttribute] public float NeedsBarValue;
 
         private KawaiijuManager _kawaiijuManager;
-        private KawaiijuFetch _fetch;
-        
+        public KawaiijuFetch Fetch { get; private set; }
         private NavMeshAgent _navAgent;
 
+        private const int SATISFACTION_DELTA = 10;
+        
         public float NeedsBarStartValue
         {
-            get { return _kawaiijuManager.LevelMilestones[_kawaiijuManager.KawaiijuLevel - 1] + 10; }
+            get { return _kawaiijuManager.LevelMilestones[_kawaiijuManager.KawaiijuLevel - 1] + SATISFACTION_DELTA; }
         }
 
         public float NeedsBarMaxValue
@@ -26,12 +27,17 @@ namespace Kawaiiju
             get { return _kawaiijuManager.LevelMilestones[_kawaiijuManager.LevelMilestones.Length - 1]; }
         }
 
+        public bool IsSatisfied
+        {
+            get { return NeedsBarValue - NeedsBarStartValue >= SATISFACTION_DELTA / 2; }
+        }
+
         private void OnEnable()
         {
             _kawaiijuManager = GetComponentInParent<KawaiijuManager>();
             
             _navAgent = GetComponentInParent<NavMeshAgent>();
-            _fetch = GetComponentInChildren<KawaiijuFetch>();
+            Fetch = GetComponentInChildren<KawaiijuFetch>();
         }
 
         private void Start()
@@ -47,9 +53,9 @@ namespace Kawaiiju
             NeedsBarValue -= m_needsBarDropSpeed * Time.deltaTime;
             
             // Todo: don't move if dead
-            if (_fetch.ClosestItem && _navAgent.velocity.magnitude < .1f)
+            if (Fetch.ClosestItem && _navAgent.velocity.magnitude < .1f)
             {
-                _navAgent.SetDestination(_fetch.ClosestItem.position);
+                _navAgent.SetDestination(Fetch.ClosestItem.position);
             }
         }
         

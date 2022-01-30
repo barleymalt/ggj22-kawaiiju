@@ -202,6 +202,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1786005038570699509}
   - component: {fileID: 1786005038570699510}
+  - component: {fileID: 6996956365234497220}
+  - component: {fileID: 2006698506050898398}
   m_Layer: 0
   m_Name: NeedsBaloon
   m_TagString: Untagged
@@ -275,6 +277,118 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6996956365234497220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786005038570699508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8146a7f3aae4b00a8de436e617098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FoodClip: {fileID: 8300000, guid: da5013a1e039542fc83d32e2f454d631, type: 3}
+  m_PlayClip: {fileID: 8300000, guid: 78f26be44fc6640649a7e89bd151644e, type: 3}
+  m_RestClip: {fileID: 8300000, guid: 7441e49ecec4d4d9a951497f28732eef, type: 3}
+  _audioSource: {fileID: 2006698506050898398}
+--- !u!82 &2006698506050898398
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786005038570699508}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1.831232
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1786005038869891174
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,8 +398,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786005038869891176}
-  - component: {fileID: 3307920020988245681}
   - component: {fileID: 5428303214160762280}
+  - component: {fileID: 3307920020988245681}
   - component: {fileID: 1786005038869891175}
   m_Layer: 0
   m_Name: Kawaiiju
@@ -310,25 +424,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3307920020988245681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786005038869891174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6b5b107de874d5eb3e8c05da276f25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TimerRandomRange: {x: 2, y: 3}
-  m_TimerCounter: 0
-  m_TimerTarget: 0
-  m_ShowNeedSpan: 5
-  m_NeedSpanCounter: 0
-  m_AppearedNeed: 0
-  m_NeedsBaloon: {fileID: 1786005038570699510}
 --- !u!114 &5428303214160762280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +438,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_needsBarDropSpeed: 0.01
   NeedsBarValue: 0
+--- !u!114 &3307920020988245681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786005038869891174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6b5b107de874d5eb3e8c05da276f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TimerRandomRange: {x: 9, y: 15}
+  m_TimerCounter: 0
+  m_TimerTarget: 0
+  m_ShowNeedSpan: 8
+  m_NeedSpanCounter: 0
+  m_AppearedNeed: 0
+  m_NeedsBaloon: {fileID: 6996956365234497220}
 --- !u!195 &1786005038869891175
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -450,6 +564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8985695183405432020}
   - component: {fileID: 4317238900846422082}
+  - component: {fileID: 2232053705929164516}
   m_Layer: 0
   m_Name: Face
   m_TagString: Untagged
@@ -522,6 +637,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2232053705929164516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289179746234569206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e81565bce7cf4d3fa8b6967acd3017a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HeadSprite: {fileID: 4317238900846422082}
+  m_NormalFace: {fileID: 21300000, guid: d376db6bf2a90734ca9a04d0b85bc9a7, type: 3}
+  m_SatisfiedFace: {fileID: 21300000, guid: fa7942af236525d4187849e21eeeaf45, type: 3}
+  m_AngryFace: {fileID: 21300000, guid: 10a383a04196d074cab9264fe5d7ff44, type: 3}
+  m_HappyFace: {fileID: 21300000, guid: 2470b7d771c14e041bb9d9d2a8097471, type: 3}
 --- !u!1 &4424837220798772276
 GameObject:
   m_ObjectHideFlags: 0

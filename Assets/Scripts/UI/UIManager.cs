@@ -40,17 +40,17 @@ namespace Kawaiiju
             _kawaiijuManager = FindObjectOfType<KawaiijuManager>();
 
             m_IncreaseBarValue.onClick.AddListener(IncreaseNeedsBar);
-            m_NeedsBar.maxValue = _kawaiijuManager.CurrentNeedsBar.NeedsBarMaxValue;
+            m_NeedsBar.maxValue = _kawaiijuManager.currentController.NeedsBarMaxValue;
         }
 
         private void Update()
         {
-            m_NeedsBar.value = _kawaiijuManager.CurrentNeedsBar.NeedsBarValue;
+            m_NeedsBar.value = _kawaiijuManager.currentController.NeedsBarValue;
         }
 
         void IncreaseNeedsBar()
         {
-            _kawaiijuManager.CurrentNeedsBar.IncreaseNeedsBar(m_IncreaseAmount);
+            _kawaiijuManager.currentController.IncreaseNeedsBar(m_IncreaseAmount);
         }
     }
 }

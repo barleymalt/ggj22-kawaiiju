@@ -95,6 +95,22 @@ PrefabInstance:
       propertyPath: m_needsBarStartValue
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_AngryFace
+      value: 
+      objectReference: {fileID: 21300000, guid: c12363cc6b09cbc42b2261922cc68c1a, type: 3}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_HappyFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 2cec21e1f21f2d245a170b37b844fba2, type: 3}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_NormalFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 883716253c25d8140a08694bbae0ee9f, type: 3}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_SatisfiedFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 58b997863ec0b1e4b8adbe23a4f825d5, type: 3}
     - target: {fileID: 2252368343769669611, guid: 8da464163983944a7bfcdd8487348130, type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.55

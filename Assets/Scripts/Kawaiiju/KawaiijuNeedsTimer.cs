@@ -30,9 +30,9 @@ namespace Kawaiiju
         [Space]
         [SerializeField, ReadOnlyAttribute] private NEED_KIND m_AppearedNeed;
 
-        [Space]
-        [SerializeField] private SpriteRenderer m_NeedsBaloon;
-        
+        [Header("Sugar")]
+        [SerializeField] private NeedsBaloon m_NeedsBaloon;
+
         public NEED_KIND AppearedNeed
         {
             get { return m_AppearedNeed; }
@@ -51,7 +51,7 @@ namespace Kawaiiju
                 m_TimerCounter = 0;
                 m_TimerTarget = Random.Range(m_TimerRandomRange.x, m_TimerRandomRange.y);
 
-                m_NeedsBaloon.gameObject.SetActive(false);   // Todo: dotween
+                m_NeedsBaloon.gameObject.SetActive(false); // Todo: dotween
 
                 while (m_TimerCounter < m_TimerTarget)
                 {
@@ -61,8 +61,10 @@ namespace Kawaiiju
                 }
 
                 m_AppearedNeed = GetRandomNeedKind();
-                m_NeedsBaloon.gameObject.SetActive(true);   // Todo: dotween
-                
+
+                m_NeedsBaloon.gameObject.SetActive(true); // Todo: dotween
+                m_NeedsBaloon.ShowNeedsBaloon(m_AppearedNeed);
+
                 Debug.Log("Need appeared.");
 
                 // Timer for how long the need will be visible
@@ -76,7 +78,7 @@ namespace Kawaiiju
                 }
 
                 m_AppearedNeed = NEED_KIND.None;
-                m_NeedsBaloon.gameObject.SetActive(false);   // Todo: dotween
+                m_NeedsBaloon.gameObject.SetActive(false); // Todo: dotween
 
                 Debug.Log("Waited too long, need disappeared.");
             }
