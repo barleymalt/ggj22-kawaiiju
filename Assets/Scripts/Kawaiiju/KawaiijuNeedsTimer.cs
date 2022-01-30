@@ -43,6 +43,8 @@ namespace Kawaiiju
 
         private void Start()
         {
+            m_NeedsBaloon.gameObject.SetActive(false);
+
             _controller = GetComponentInParent<KawaiijuController>();
             _controller.Fetch.OnWantedNeedSatisfied_AddCallback(m_NeedsBaloon.HideNeedsBaloon);
             _controller.Fetch.OnWantedNeedSatisfied_AddCallback(RestartTimer);
@@ -54,15 +56,14 @@ namespace Kawaiiju
         {
             while (true)
             {
+                m_AppearedNeed = NEED_KIND.None;
                 // Timer for when the next need needs to be spawned
                 m_TimerCounter = 0;
                 // Timer for how long the need will be visible
                 m_NeedSpanCounter = 0;
                 // How long before the nned appears
                 m_TimerTarget = Random.Range(m_TimerRandomRange.x, m_TimerRandomRange.y);
-
-                m_NeedsBaloon.gameObject.SetActive(false); // Todo: dotween
-
+                
                 while (m_TimerCounter < m_TimerTarget)
                 {
                     yield return new WaitForSecondsRealtime(1);
@@ -83,7 +84,6 @@ namespace Kawaiiju
                     m_NeedSpanCounter += 1;
                 }
 
-                m_AppearedNeed = NEED_KIND.None;
                 m_NeedsBaloon.HideNeedsBaloon();
 
                 Debug.Log("Waited too long, need disappeared.");

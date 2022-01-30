@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,22 +9,23 @@ namespace Kawaiiju
 {
     public class ItemsThrower : MonoBehaviour
     {
-        [SerializeField] private Transform[] m_SpawnPoints;
         [SerializeField] private ItemsCollection[] m_ItemsCollections;
 
         [Space]
         [SerializeField] private Item m_ItemPrefab;
-        [Space]
-        [SerializeField] private ItemData m_ItemOneData;
-        [SerializeField] private ItemData m_ItemTwoData;
-        [SerializeField] private ItemData m_ItemThreeData;
+        [SerializeField] private int m_ButtonsUpdateTimer;
+        
+        [Space, SerializeField] private Transform[] m_SpawnPoints;
 
-        [ReadOnlyAttribute]
-        public List<Item> SpawnedItems = new List<Item>();
+        public List<Item> SpawnedItems { get; } = new List<Item>();
+
+        private ItemData m_ItemOneData;
+        private ItemData m_ItemTwoData;
+        private ItemData m_ItemThreeData;
 
         private KawaiijuManager _kawaiijuManager;
 
-        
+
         private UnityAction<ItemData> _onUpdateButtonOne;
         public void OnUpdateButtonOne_AddCallback(UnityAction<ItemData> a) => _onUpdateButtonOne += a;
         private UnityAction<ItemData> _onUpdateButtonTwo;
@@ -42,6 +44,8 @@ namespace Kawaiiju
             UpdateSpawnableItems(1);
             UpdateSpawnableItems(2);
             UpdateSpawnableItems(3);
+
+            StartCoroutine(C_UpdateItemsCycle());
         }
 
         public void SpawnItemOne()
@@ -100,6 +104,19 @@ namespace Kawaiiju
                     m_ItemThreeData = collection.GetRandomItemData;
                     _onUpdateButtonThree?.Invoke(m_ItemThreeData);
                     break;
+            }
+        }
+
+        IEnumerator C_UpdateItemsCycle()
+        {
+            while (true)
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    yield return new WaitForSeconds(m_ButtonsUpdateTimer);
+
+                    UpdateSpawnableItems(i);
+                }
             }
         }
 
