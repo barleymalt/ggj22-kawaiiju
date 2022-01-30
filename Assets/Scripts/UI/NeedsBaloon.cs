@@ -9,12 +9,19 @@ namespace Kawaiiju
         [SerializeField] private AudioClip m_PlayClip;
         [SerializeField] private AudioClip m_RestClip;
 
-        [SerializeField] private AudioSource _audioSource;
-
 
         public void ShowNeedsBaloon(NEED_KIND kind)
         {
+            gameObject.SetActive(true);
+            
             StartCoroutine(C_ShowBaloon(kind));
+        }
+
+        public void HideNeedsBaloon()
+        {
+            gameObject.SetActive(false);
+
+            SoundManager.Instance.StopSFX();
         }
 
         IEnumerator C_ShowBaloon(NEED_KIND kind)
@@ -22,13 +29,13 @@ namespace Kawaiiju
             switch (kind)
             {
                 case NEED_KIND.Food:
-                    _audioSource.PlayOneShot(m_FoodClip);
+                    SoundManager.Instance.PlaySFX(m_FoodClip);
                     break;
                 case NEED_KIND.Play:
-                    _audioSource.PlayOneShot(m_PlayClip);
+                    SoundManager.Instance.PlaySFX(m_PlayClip);
                     break;
                 case NEED_KIND.Rest:
-                    _audioSource.PlayOneShot(m_RestClip);
+                    SoundManager.Instance.PlaySFX(m_RestClip);
                     break;
             }
 

@@ -13,22 +13,20 @@ public class ItemButton : Button
 {
     [SerializeField] private Image m_ButtonIcon;
     [SerializeField] private TextMeshProUGUI m_buttonText;
-
-    private int _buttonDisableCountdown;
+    [SerializeField] private int m_DisableTimer;
     
     
     public void UpdateButtonIcon(ItemData data)
     {
         m_ButtonIcon.sprite = data.Sprite;
         m_buttonText.text = data.Name;
-        _buttonDisableCountdown = data.Satisfaction;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
 
-        StartCoroutine(C_TempDisableButton(_buttonDisableCountdown));
+        StartCoroutine(C_TempDisableButton(m_DisableTimer));
     }
 
     IEnumerator C_TempDisableButton(int countdown)
