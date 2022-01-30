@@ -35,6 +35,12 @@ namespace Kawaiiju
         private UnityAction _onGameOver;
         public void OnGameOver_AddCallback(UnityAction a) => _onGameOver += a;
 
+
+        private void Awake()
+        {
+            currentController = m_KawaiijuKid;
+        }
+
         private void Start()
         {
             HandleLevelUp();
