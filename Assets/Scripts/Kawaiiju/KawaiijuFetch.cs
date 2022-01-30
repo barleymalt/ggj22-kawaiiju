@@ -8,7 +8,8 @@ namespace Kawaiiju
     public class KawaiijuFetch : MonoBehaviour
     {
         [SerializeField, ReadOnlyAttribute] private Transform m_ClosestItem;
-
+        
+        
         public Transform ClosestItem
         {
             get { return m_ClosestItem; }
@@ -59,7 +60,7 @@ namespace Kawaiiju
             if (_kawaiijuNeedsTimer.AppearedNeed == NEED_KIND.None)
             {
                 _onArbitraryNeedSatisfied?.Invoke();
-
+                
                 Debug.Log("Need satisfied when NOT needed!");
             }
             // WANTED: If the kawaiiju satisfies a need that it wants

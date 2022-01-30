@@ -87,6 +87,22 @@ PrefabInstance:
       propertyPath: m_needsBarStartValue
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_AngryFace
+      value: 
+      objectReference: {fileID: 21300000, guid: b23a735dc8d3b5544a04cb3f64e119a7, type: 3}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_HappyFace
+      value: 
+      objectReference: {fileID: 21300000, guid: ba1c2d8bac3c94c42b90343079614abf, type: 3}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_NormalFace
+      value: 
+      objectReference: {fileID: 21300000, guid: ca972d5cb747d3b4d8cdb020162fbcad, type: 3}
+    - target: {fileID: 2232053705929164516, guid: 8da464163983944a7bfcdd8487348130, type: 3}
+      propertyPath: m_SatisfiedFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 87307c6304f1f6b47838b88ea6e8af25, type: 3}
     - target: {fileID: 4317238900846422082, guid: 8da464163983944a7bfcdd8487348130, type: 3}
       propertyPath: m_Sprite
       value: 
