@@ -36,7 +36,7 @@ public class KawaiijuEmoji : MonoBehaviour
         StartCoroutine(C_SwapFace(m_AngryFace));
     }
     
-    private void OnArbitraryNeedSatisfied()
+    private void OnArbitraryNeedSatisfied(Item i)
     {
         StartCoroutine(C_SwapFace(m_AngryFace));
     }

@@ -24,8 +24,8 @@ namespace Kawaiiju
             get { return m_LevelMilestones; }
         }
 
-       public UnityEvent OnMaxLevel;
-       // public UnityEvent OnDeath;
+       public UnityEvent OnWin;
+       public UnityEvent OnLose;
 
         private void Start()
         {
@@ -63,6 +63,8 @@ namespace Kawaiiju
             // If the needs bar value is lower than the current level minimum, death!
             if (currentController.NeedsBarValue < m_LevelMilestones[KawaiijuLevel - 1])
             {
+                OnLose?.Invoke();
+                
                 Debug.Log("Kawaiiju ded!");
 
                 return true;
@@ -76,7 +78,7 @@ namespace Kawaiiju
             // Check when the max level is reached, WIN CONDITION?
             if (KawaiijuLevel == m_LevelMilestones.Length)
             {
-                OnMaxLevel?.Invoke();
+                OnWin?.Invoke();
                 
                 Debug.Log("Max level reached!");
 
