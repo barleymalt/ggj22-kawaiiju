@@ -26,17 +26,17 @@ public class KawaiijuEmoji : MonoBehaviour
         _controller.Fetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
     }
 
-    private void OnWantedNeedSatisfied(Item i)
+    private void OnWantedNeedSatisfied()
     {
         StartCoroutine(C_SwapFace(m_HappyFace));
     }
     
-    private void OnUnwantedNeedSatisfied(Item i)
+    private void OnUnwantedNeedSatisfied()
     {
         StartCoroutine(C_SwapFace(m_AngryFace));
     }
     
-    private void OnArbitraryNeedSatisfied(Item i)
+    private void OnArbitraryNeedSatisfied()
     {
         StartCoroutine(C_SwapFace(m_AngryFace));
     }

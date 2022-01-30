@@ -61,9 +61,9 @@ namespace Kawaiiju
         
         private void InitNeedEvents()
         {
-            Fetch.OnWantedNeedSatisfied_AddCallback(OnWantedNeedSatisfied);
-            Fetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
-            Fetch.OnArbitraryNeedSatisfied_AddCallback(OnArbitraryNeedSatisfied);
+            Fetch.OnWantedNeedSatisfied_Item_AddCallback(OnWantedNeedSatisfied);
+            Fetch.OnUnwantedNeedSatisfied_Item_AddCallback(OnUnwantedNeedSatisfied);
+            Fetch.OnArbitraryNeedSatisfied_Item_AddCallback(OnArbitraryNeedSatisfied);
         }
 
         private void OnWantedNeedSatisfied(Item fetchedItem)
