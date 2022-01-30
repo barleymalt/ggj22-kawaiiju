@@ -30,8 +30,8 @@ namespace Kawaiiju
         public void OnUnwantedNeedSatisfied_AddCallback(UnityAction<Item> a) => _onUnwantedNeedSatisfied += a;
 
         // When a need is satisfied but the kawaiiju wasn't looking for anything
-        private UnityAction _onArbitraryNeedSatisfied;
-        public void OnArbitraryNeedSatisfied_AddCallback(UnityAction a) => _onArbitraryNeedSatisfied += a;
+        private UnityAction<Item> _onArbitraryNeedSatisfied;
+        public void OnArbitraryNeedSatisfied_AddCallback(UnityAction<Item> a) => _onArbitraryNeedSatisfied += a;
 
 
         private void OnEnable()
@@ -59,7 +59,7 @@ namespace Kawaiiju
             // ARBITRARY: If the kawaiiju satisfies a need but it didn't want anything
             if (_kawaiijuNeedsTimer.AppearedNeed == NEED_KIND.None)
             {
-                _onArbitraryNeedSatisfied?.Invoke();
+                _onArbitraryNeedSatisfied?.Invoke(fetchedItem);
                 
                 Debug.Log("Need satisfied when NOT needed!");
             }

@@ -6,14 +6,14 @@ namespace Kawaiiju
 {
     public class KawaiijuController : MonoBehaviour
     {
-        // [SerializeField] private float m_needsBarStartValue;
         [SerializeField] private float m_needsBarDropSpeed;
 
         [Space, ReadOnlyAttribute] public float NeedsBarValue;
 
         private KawaiijuManager _kawaiijuManager;
+        
         public KawaiijuFetch Fetch { get; private set; }
-        private NavMeshAgent _navAgent;
+        private NavMeshAgent NavAgent { get; set; }
 
         private const int SATISFACTION_DELTA = 10;
         
@@ -36,7 +36,7 @@ namespace Kawaiiju
         {
             _kawaiijuManager = GetComponentInParent<KawaiijuManager>();
             
-            _navAgent = GetComponentInParent<NavMeshAgent>();
+            NavAgent = GetComponentInParent<NavMeshAgent>();
             Fetch = GetComponentInChildren<KawaiijuFetch>();
         }
 
@@ -53,19 +53,17 @@ namespace Kawaiiju
             NeedsBarValue -= m_needsBarDropSpeed * Time.deltaTime;
             
             // Todo: don't move if dead
-            if (Fetch.ClosestItem && _navAgent.velocity.magnitude < .1f)
+            if (Fetch.ClosestItem && NavAgent.velocity.magnitude < .1f)
             {
-                _navAgent.SetDestination(Fetch.ClosestItem.position);
+                NavAgent.SetDestination(Fetch.ClosestItem.position);
             }
         }
         
         private void InitNeedEvents()
         {
-            var kawaiijuFetch = GetComponentInChildren<KawaiijuFetch>();
-
-            kawaiijuFetch.OnWantedNeedSatisfied_AddCallback(OnWantedNeedSatisfied);
-            kawaiijuFetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
-            kawaiijuFetch.OnArbitraryNeedSatisfied_AddCallback(OnArbitraryNeedSatisfied);
+            Fetch.OnWantedNeedSatisfied_AddCallback(OnWantedNeedSatisfied);
+            Fetch.OnUnwantedNeedSatisfied_AddCallback(OnUnwantedNeedSatisfied);
+            Fetch.OnArbitraryNeedSatisfied_AddCallback(OnArbitraryNeedSatisfied);
         }
 
         private void OnWantedNeedSatisfied(Item fetchedItem)
@@ -75,12 +73,12 @@ namespace Kawaiiju
 
         private void OnUnwantedNeedSatisfied(Item fetchedItem)
         {
-            DecreaseNeedsBar((float) fetchedItem.SatisfactionAmount / 2);
+            DecreaseNeedsBar(fetchedItem.SatisfactionAmount);
         }
 
-        private void OnArbitraryNeedSatisfied()
+        private void OnArbitraryNeedSatisfied(Item fetchedItem)
         {
-            IncreaseNeedsBar(1);
+            DecreaseNeedsBar((float) fetchedItem.SatisfactionAmount / 2);
         }
 
         public void IncreaseNeedsBar(float amount)
