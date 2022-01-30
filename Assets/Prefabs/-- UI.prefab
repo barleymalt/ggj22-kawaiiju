@@ -2287,6 +2287,7 @@ MonoBehaviour:
       m_Calls: []
   m_ButtonIcon: {fileID: 4943981456520063707}
   m_buttonText: {fileID: 4943981456147626558}
+  m_DisableTimer: 3
 --- !u!1 &4943981456697175178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,6 +3197,7 @@ MonoBehaviour:
       m_Calls: []
   m_ButtonIcon: {fileID: 4943981455575283103}
   m_buttonText: {fileID: 4943981457345332814}
+  m_DisableTimer: 3
 --- !u!1 &4943981457292544759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,6 +3577,7 @@ MonoBehaviour:
       m_Calls: []
   m_ButtonIcon: {fileID: 4943981456293239078}
   m_buttonText: {fileID: 4943981456990578965}
+  m_DisableTimer: 3
 --- !u!1 &4943981457596834658
 GameObject:
   m_ObjectHideFlags: 0

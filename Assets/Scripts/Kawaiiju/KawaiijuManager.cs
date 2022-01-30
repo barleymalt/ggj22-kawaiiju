@@ -28,7 +28,13 @@ namespace Kawaiiju
         public UnityEvent OnLose;
 
         private bool _gameOver;
-        
+
+        private UnityAction<int> _onLevelUp;
+        public void OnLevelUp_AddCallback(UnityAction<int> a) => _onLevelUp += a;
+
+        private UnityAction _onGameOver;
+        public void OnGameOver_AddCallback(UnityAction a) => _onGameOver += a;
+
         private void Start()
         {
             HandleLevelUp();
@@ -36,9 +42,9 @@ namespace Kawaiiju
 
         void Update()
         {
-            if(_gameOver)
+            if (_gameOver)
                 return;
-            
+
             if (OnMaxLevelReached())
                 return;
 
@@ -58,6 +64,7 @@ namespace Kawaiiju
                 Debug.Log("Level up!");
 
                 KawaiijuLevel++;
+                _onLevelUp?.Invoke((int) currentController.NeedsBarMaxValue);
 
                 HandleLevelUp();
             }
@@ -74,7 +81,8 @@ namespace Kawaiiju
                 Debug.Log("Kawaiiju ded!");
 
                 _gameOver = true;
-
+                _onGameOver?.Invoke();
+                
                 return true;
             }
 
@@ -92,7 +100,8 @@ namespace Kawaiiju
                 Debug.Log("Max level reached!");
 
                 _gameOver = true;
-                
+                _onGameOver?.Invoke();
+
                 return true;
             }
 

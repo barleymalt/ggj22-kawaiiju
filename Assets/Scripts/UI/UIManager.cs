@@ -41,11 +41,19 @@ namespace Kawaiiju
 
             m_IncreaseBarValue.onClick.AddListener(IncreaseNeedsBar);
             m_NeedsBar.maxValue = _kawaiijuManager.currentController.NeedsBarMaxValue;
+            
+            _kawaiijuManager.OnLevelUp_AddCallback(UpdateBarMaxValue);
         }
 
         private void Update()
         {
             m_NeedsBar.value = _kawaiijuManager.currentController.NeedsBarValue;
+        }
+
+        void UpdateBarMaxValue(int newMax)
+        {
+            m_NeedsBar.minValue = _kawaiijuManager.currentController.NeedsBarStartValue - _kawaiijuManager.currentController.StartSatisfaction;
+            m_NeedsBar.maxValue = _kawaiijuManager.currentController.NeedsBarMaxValue;
         }
 
         void IncreaseNeedsBar()

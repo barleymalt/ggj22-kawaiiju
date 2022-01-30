@@ -25,6 +25,7 @@ namespace Kawaiiju
 
         private KawaiijuManager _kawaiijuManager;
 
+        private Coroutine _updateItemsCycleCo;
 
         private UnityAction<ItemData> _onUpdateButtonOne;
         public void OnUpdateButtonOne_AddCallback(UnityAction<ItemData> a) => _onUpdateButtonOne += a;
@@ -37,6 +38,8 @@ namespace Kawaiiju
         private void Awake()
         {
             _kawaiijuManager = FindObjectOfType<KawaiijuManager>();
+            
+            _kawaiijuManager.OnGameOver_AddCallback(StopUpdateItemsCyle);
         }
 
         private void Start()
@@ -45,7 +48,7 @@ namespace Kawaiiju
             UpdateSpawnableItems(2);
             UpdateSpawnableItems(3);
 
-            StartCoroutine(C_UpdateItemsCycle());
+            _updateItemsCycleCo = StartCoroutine(C_UpdateItemsCycle());
         }
 
         public void SpawnItemOne()
@@ -118,6 +121,11 @@ namespace Kawaiiju
                     UpdateSpawnableItems(i);
                 }
             }
+        }
+
+        void StopUpdateItemsCyle()
+        {
+            StopCoroutine(C_UpdateItemsCycle());
         }
 
         private Vector3 GetRandomSpawnPoint()
