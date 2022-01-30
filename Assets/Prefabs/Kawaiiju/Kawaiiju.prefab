@@ -319,10 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8146a7f3aae4b00a8de436e617098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FoodClip: {fileID: 8300000, guid: da5013a1e039542fc83d32e2f454d631, type: 3}
-  m_PlayClip: {fileID: 8300000, guid: 78f26be44fc6640649a7e89bd151644e, type: 3}
-  m_RestClip: {fileID: 8300000, guid: 7441e49ecec4d4d9a951497f28732eef, type: 3}
-  _audioSource: {fileID: 2006698506050898398}
+  m_FoodClip: {fileID: 8300000, guid: 424cc9771f21a42ada4334ec2db86992, type: 3}
+  m_PlayClip: {fileID: 8300000, guid: 5ffc31725cf23426cac7041e46ac0963, type: 3}
+  m_RestClip: {fileID: 8300000, guid: 46cc22ea93fb74fa488c50583bb51dce, type: 3}
 --- !u!82 &2006698506050898398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -467,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dad00f1a48b9452e97bfd83184f8c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartSatisfaction: 8
   m_needsBarDropSpeed: 0.01
   NeedsBarValue: 0
 --- !u!114 &3307920020988245681

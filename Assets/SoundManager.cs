@@ -8,6 +8,7 @@ public class SoundManager : Singleton<SoundManager>
 
     [SerializeField] private AudioSource m_MusicSource;
     [SerializeField] private AudioSource m_SFXSource;
+    [SerializeField] private AudioSource m_EndSFXSource;
     
 
     public void ChangeBackgroundMusic(int index)
@@ -18,12 +19,11 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayWinMusic()
     {
-        m_MusicSource.clip = m_MusicTracks[0];
+        m_MusicSource.clip = m_MusicTracks[3];
         m_MusicSource.Play();
         
-        m_SFXSource.loop = false;
-        m_SFXSource.clip = m_WinMusic;
-        m_SFXSource.Play();
+        m_EndSFXSource.clip = m_WinMusic;
+        m_EndSFXSource.Play();
     }
     
     public void PlayLoseMusic()
@@ -31,9 +31,8 @@ public class SoundManager : Singleton<SoundManager>
         m_MusicSource.clip = m_MusicTracks[0];
         m_MusicSource.Play();
         
-        m_SFXSource.loop = false;
-        m_SFXSource.clip = m_LoseMusic;
-        m_SFXSource.Play();
+        m_EndSFXSource.clip = m_LoseMusic;
+        m_EndSFXSource.Play();
     }
 
     public void PlaySFX(AudioClip sfxClip)
