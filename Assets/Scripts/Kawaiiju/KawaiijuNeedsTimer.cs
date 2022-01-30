@@ -33,6 +33,9 @@ namespace Kawaiiju
         [Header("Sugar")]
         [SerializeField] private NeedsBaloon m_NeedsBaloon;
 
+        private KawaiijuController _controller;
+        private Coroutine _triggerNeedTimerCo;
+        
         public NEED_KIND AppearedNeed
         {
             get { return m_AppearedNeed; }
@@ -40,19 +43,27 @@ namespace Kawaiiju
 
         private void Start()
         {
-            StartCoroutine(C_TriggerNeedTimer());
+            m_NeedsBaloon.gameObject.SetActive(false);
+
+            _controller = GetComponentInParent<KawaiijuController>();
+            _controller.Fetch.OnWantedNeedSatisfied_AddCallback(m_NeedsBaloon.HideNeedsBaloon);
+            _controller.Fetch.OnWantedNeedSatisfied_AddCallback(RestartTimer);
+            
+            _triggerNeedTimerCo = StartCoroutine(C_TriggerNeedTimer());
         }
 
         private IEnumerator C_TriggerNeedTimer()
         {
             while (true)
             {
+                m_AppearedNeed = NEED_KIND.None;
                 // Timer for when the next need needs to be spawned
                 m_TimerCounter = 0;
+                // Timer for how long the need will be visible
+                m_NeedSpanCounter = 0;
+                // How long before the nned appears
                 m_TimerTarget = Random.Range(m_TimerRandomRange.x, m_TimerRandomRange.y);
-
-                m_NeedsBaloon.gameObject.SetActive(false); // Todo: dotween
-
+                
                 while (m_TimerCounter < m_TimerTarget)
                 {
                     yield return new WaitForSecondsRealtime(1);
@@ -64,9 +75,7 @@ namespace Kawaiiju
                 m_NeedsBaloon.ShowNeedsBaloon(m_AppearedNeed);
 
                 Debug.Log("Need appeared.");
-
-                // Timer for how long the need will be visible
-                m_NeedSpanCounter = 0;
+                
 
                 while (m_NeedSpanCounter < m_ShowNeedSpan)
                 {
@@ -75,11 +84,17 @@ namespace Kawaiiju
                     m_NeedSpanCounter += 1;
                 }
 
-                m_AppearedNeed = NEED_KIND.None;
                 m_NeedsBaloon.HideNeedsBaloon();
 
                 Debug.Log("Waited too long, need disappeared.");
             }
+        }
+
+        private void RestartTimer()
+        {
+            StopCoroutine(_triggerNeedTimerCo);
+            
+            _triggerNeedTimerCo = StartCoroutine(C_TriggerNeedTimer());
         }
 
         static NEED_KIND GetRandomNeedKind()
