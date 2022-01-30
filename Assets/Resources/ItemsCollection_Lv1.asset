@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - Name: Pear
-    Satisfaction: 3
+    Satisfaction: 5
     Kind: 1
     Sprite: {fileID: 21300000, guid: 5fb35c40f3d0b3e4790a279b7a2e959c, type: 3}
     Clip: {fileID: 0}
   - Name: Skewers
-    Satisfaction: 5
+    Satisfaction: 10
     Kind: 1
     Sprite: {fileID: 21300000, guid: 114aa472c8012a34292993f65dc7cb7c, type: 3}
     Clip: {fileID: 0}
   - Name: Sausage
-    Satisfaction: 3
+    Satisfaction: 5
     Kind: 1
     Sprite: {fileID: 21300000, guid: 0535eabbfccd28a48b1630d3aa30f0ef, type: 3}
     Clip: {fileID: 0}
   - Name: Crap
-    Satisfaction: 3
+    Satisfaction: 5
     Kind: 2
     Sprite: {fileID: 21300000, guid: 6aa8f041928fd7a49baaf845f1c0ef55, type: 3}
     Clip: {fileID: 0}
@@ -39,22 +39,22 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: f51800eba7e96f046afeca2d80bf2bb1, type: 3}
     Clip: {fileID: 0}
   - Name: Car
-    Satisfaction: 3
+    Satisfaction: 5
     Kind: 2
     Sprite: {fileID: 21300000, guid: 0698386aae7eda3449ed1c87d0817c1d, type: 3}
     Clip: {fileID: 0}
   - Name: Sleep Pill
-    Satisfaction: 5
+    Satisfaction: 10
     Kind: 2
     Sprite: {fileID: 21300000, guid: 10c13e2227188f8408405541f7f9e8da, type: 3}
     Clip: {fileID: 0}
   - Name: Nest
-    Satisfaction: 3
+    Satisfaction: 5
     Kind: 2
     Sprite: {fileID: 21300000, guid: b13e48132f0c7114aac1b5f4c1f4b7f3, type: 3}
     Clip: {fileID: 0}
   - Name: Herb Tea
-    Satisfaction: 3
+    Satisfaction: 5
     Kind: 2
     Sprite: {fileID: 21300000, guid: 21b132725fa768f43bc60f251a04f7b4, type: 3}
     Clip: {fileID: 0}
