@@ -257,6 +257,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 488545653, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 488545653, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488545653, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488545653, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3874545734709600688, guid: 7a6b448465117c84891f5274a998159e, type: 3}
       propertyPath: m_Name
       value: -- ENVIRONMENT
@@ -303,6 +319,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3874545734709600689, guid: 7a6b448465117c84891f5274a998159e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507254538033908352, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507254538033908352, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507254538033908352, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507254538033908352, guid: 7a6b448465117c84891f5274a998159e, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -512,7 +544,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.369
+  m_Volume: 0.33
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -741,6 +773,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 43086387, guid: f4e6956c65777486c9aa765a6f24f3a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4943981455615451522, guid: f4e6956c65777486c9aa765a6f24f3a4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
