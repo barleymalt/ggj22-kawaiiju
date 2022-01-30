@@ -70,7 +70,7 @@ namespace Kawaiiju
                 Debug.Log("Level up!");
 
                 KawaiijuLevel++;
-                _onLevelUp?.Invoke((int) currentController.NeedsBarMaxValue);
+                _onLevelUp?.Invoke(KawaiijuLevel);
 
                 HandleLevelUp();
             }
