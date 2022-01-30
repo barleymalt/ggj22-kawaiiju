@@ -45,16 +45,16 @@ MonoBehaviour:
     Clip: {fileID: 0}
   - Name: The Pill
     Satisfaction: 10
-    Kind: 2
+    Kind: 3
     Sprite: {fileID: 21300000, guid: ec9889054b7c8154e85f528aab137da8, type: 3}
     Clip: {fileID: 0}
   - Name: Hammock
     Satisfaction: 5
-    Kind: 2
+    Kind: 3
     Sprite: {fileID: 21300000, guid: 9aaccc7fa47d8044b8d4a4ec57f61574, type: 3}
     Clip: {fileID: 0}
   - Name: The Cure
     Satisfaction: 5
-    Kind: 2
+    Kind: 3
     Sprite: {fileID: 21300000, guid: f3e5e28585bde5044844111c4f79f99f, type: 3}
     Clip: {fileID: 0}
