@@ -2687,6 +2687,7 @@ MonoBehaviour:
   m_ItemOne: {fileID: 4943981456629662389}
   m_ItemTwo: {fileID: 4943981457563065741}
   m_ItemThree: {fileID: 4943981457235825373}
+  m_Menu: {fileID: 1117980514}
   m_IncreaseBarValue: {fileID: 4943981455615451521}
   m_NeedsBar: {fileID: 4943981457352106734}
   m_IncreaseAmount: 5
