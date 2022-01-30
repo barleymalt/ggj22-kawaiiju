@@ -12,7 +12,7 @@ namespace Kawaiiju
         [SerializeField] private KawaiijuController m_KawaiijuKid;
         [SerializeField] private KawaiijuController m_KawaiijuYoung;
         [SerializeField] private KawaiijuController m_KawaiijuAdult;
-        
+
         [Space, SerializeField] private int[] m_LevelMilestones;
         [Space, ReadOnlyAttribute] public int KawaiijuLevel = 1;
 
@@ -24,9 +24,11 @@ namespace Kawaiiju
             get { return m_LevelMilestones; }
         }
 
-       public UnityEvent OnMaxLevel;
-       // public UnityEvent OnDeath;
+        public UnityEvent OnWin;
+        public UnityEvent OnLose;
 
+        private bool _gameOver;
+        
         private void Start()
         {
             HandleLevelUp();
@@ -34,6 +36,9 @@ namespace Kawaiiju
 
         void Update()
         {
+            if(_gameOver)
+                return;
+            
             if (OnMaxLevelReached())
                 return;
 
@@ -53,7 +58,7 @@ namespace Kawaiiju
                 Debug.Log("Level up!");
 
                 KawaiijuLevel++;
-                
+
                 HandleLevelUp();
             }
         }
@@ -63,7 +68,12 @@ namespace Kawaiiju
             // If the needs bar value is lower than the current level minimum, death!
             if (currentController.NeedsBarValue < m_LevelMilestones[KawaiijuLevel - 1])
             {
+                OnLose?.Invoke();
+                SoundManager.Instance.PlayLoseMusic();
+
                 Debug.Log("Kawaiiju ded!");
+
+                _gameOver = true;
 
                 return true;
             }
@@ -76,10 +86,13 @@ namespace Kawaiiju
             // Check when the max level is reached, WIN CONDITION?
             if (KawaiijuLevel == m_LevelMilestones.Length)
             {
-                OnMaxLevel?.Invoke();
-                
+                OnWin?.Invoke();
+                SoundManager.Instance.PlayWinMusic();
+
                 Debug.Log("Max level reached!");
 
+                _gameOver = true;
+                
                 return true;
             }
 
@@ -95,16 +108,19 @@ namespace Kawaiiju
                 case 1:
                     currentController = m_KawaiijuKid;
                     m_KawaiijuKid.gameObject.SetActive(true);
+                    SoundManager.Instance.ChangeBackgroundMusic(0);
                     break;
                 case 2:
                     m_KawaiijuKid.gameObject.SetActive(false);
                     m_KawaiijuYoung.gameObject.SetActive(true);
                     currentController = m_KawaiijuYoung;
+                    SoundManager.Instance.ChangeBackgroundMusic(1);
                     break;
                 case 3:
                     m_KawaiijuYoung.gameObject.SetActive(false);
                     m_KawaiijuAdult.gameObject.SetActive(true);
                     currentController = m_KawaiijuAdult;
+                    SoundManager.Instance.ChangeBackgroundMusic(2);
                     break;
             }
         }

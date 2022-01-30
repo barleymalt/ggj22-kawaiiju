@@ -23,6 +23,7 @@ namespace Kawaiiju
 
         private KawaiijuManager _kawaiijuManager;
 
+        
         private UnityAction<ItemData> _onUpdateButtonOne;
         public void OnUpdateButtonOne_AddCallback(UnityAction<ItemData> a) => _onUpdateButtonOne += a;
         private UnityAction<ItemData> _onUpdateButtonTwo;

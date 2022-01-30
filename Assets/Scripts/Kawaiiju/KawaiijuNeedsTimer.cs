@@ -61,8 +61,6 @@ namespace Kawaiiju
                 }
 
                 m_AppearedNeed = GetRandomNeedKind();
-
-                m_NeedsBaloon.gameObject.SetActive(true); // Todo: dotween
                 m_NeedsBaloon.ShowNeedsBaloon(m_AppearedNeed);
 
                 Debug.Log("Need appeared.");
@@ -78,7 +76,7 @@ namespace Kawaiiju
                 }
 
                 m_AppearedNeed = NEED_KIND.None;
-                m_NeedsBaloon.gameObject.SetActive(false); // Todo: dotween
+                m_NeedsBaloon.HideNeedsBaloon();
 
                 Debug.Log("Waited too long, need disappeared.");
             }
